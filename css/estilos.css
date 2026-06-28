@@ -28,7 +28,18 @@ body {
 /* ==========================================================================
    2. IMAGEN DE FONDO Y ANIMACIÓN DE ZOOM DE INICIO
    ========================================================================== */
-
+.background-img {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh;
+    object-fit: cover;
+    z-index: -10; /* Asegúrate que esté bien atrás */
+    filter: none !important; /* Desactiva filtros para probar */
+    opacity: 1 !important; 
+    display: block !important;
+}
 
 @keyframes background-glitch {
     0%, 94%, 100% { transform: scale(1); filter: brightness(60%) contrast(130%) grayscale(30%); }
