@@ -28,16 +28,7 @@ body {
 /* ==========================================================================
    2. IMAGEN DE FONDO Y ANIMACIÓN DE ZOOM DE INICIO
    ========================================================================== */
-.background-img {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    object-fit: cover;
-    z-index: -2;
-    filter: brightness(60%) contrast(130%) grayscale(30%); 
-    opacity: 0.95;
-    animation: background-glitch 10s infinite alternate ease-in-out;
-    transition: filter 0.5s ease;
-}
+
 
 @keyframes background-glitch {
     0%, 94%, 100% { transform: scale(1); filter: brightness(60%) contrast(130%) grayscale(30%); }
