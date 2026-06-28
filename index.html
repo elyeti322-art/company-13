@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compañía 13</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <div id="tv-off-effect" class="hidden"></div>
+
+    <div class="vhs-overlay noise"></div>
+    <div class="vhs-overlay scanlines"></div>
+
+    <img src="img/mina.png" alt="Fondo Mina" class="background-img" id="bg-image">
+
+    <div class="camera-shake" id="main-camera">
+        
+        <div class="cam-ui">
+            <div class="rec-dot">● REC</div>
+            <div class="cam-date">28 JUN. 2026</div>
+        </div>
+
+        <main class="menu-container" id="menu-principal">
+            <h1 class="menu-title">Compañía 13</h1>
+            <nav class="menu-options">
+                <button class="menu-btn" id="btn-iniciar">Iniciar partida</button>
+                <button class="menu-btn" id="btn-ajustes">Ajustes</button>
+                <button class="menu-btn" id="btn-salir">Salir</button>
+            </nav>
+        </main>
+
+        <div class="loading-container hidden" id="pantalla-carga">
+            <p class="loading-text">Cargando.....</p>
+        </div>
+
+        <div class="settings-container hidden" id="pantalla-ajustes">
+            <h2 class="settings-title">Ajustes de Señal</h2>
+            
+            <div class="setting-row">
+                <label for="input-volumen">Volumen (0-100):</label>
+                <input type="number" id="input-volumen" min="0" max="100" value="100" placeholder="100">
+            </div>
+
+            <div class="setting-row">
+                <label for="input-opacidad">Opacidad VHS (0.1 - 1):</label>
+                <input type="number" id="input-opacidad" min="0.1" max="1" step="0.1" value="0.7" placeholder="0.7">
+            </div>
+
+            <button class="menu-btn apply-btn" id="btn-aplicar">APLICAR</button>
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+/* ==========================================================================
+   1. CONFIGURACIÓN BASE Y RETRO FUENTE
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Clase global para ocultar pantallas secundarias */
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   2. IMAGEN DE FONDO Y ANIMACIÓN DE ZOOM DE INICIO
+   ========================================================================== */
+.background-img {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    filter: brightness(60%) contrast(130%) grayscale(30%); 
+    opacity: 0.95;
+    animation: background-glitch 10s infinite alternate ease-in-out;
+    transition: filter 0.5s ease;
+}
+
+@keyframes background-glitch {
+    0%, 94%, 100% { transform: scale(1); filter: brightness(60%) contrast(130%) grayscale(30%); }
+    95% { transform: scale(1.02); filter: brightness(80%) contrast(150%); }
+    97% { transform: scale(1); }
+}
+
+/* Clase que se activará en JS para el zoom a negro de 3 segundos */
+.bg-zoom-black {
+    animation: zoomToBlack 3s forwards cubic-bezier(0.7, 0, 0.3, 1) !important;
+}
+
+@keyframes zoomToBlack {
+    0% { transform: scale(1); filter: brightness(60%); }
+    70% { filter: brightness(0%); } /* Se oscurece por completo antes de terminar */
+    100% { transform: scale(5); filter: brightness(0%); }
+}
+
+/* ==========================================================================
+   3. CAPAS DE INTERFERENCIA VHS (ESTÁTICA)
+   ========================================================================== */
+.noise {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 2px);
+    animation: noise-move 0.2s infinite;
+    z-index: 9;
+    pointer-events: none;
+    opacity: 0.7; /* Este valor cambiará dinámicamente desde Ajustes */
+}
+
+@keyframes noise-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100px; }
+}
+
+.scanlines {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 6px 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   4. EFECTO DE CÁMARA EN MANO (TEMBLOR DE INTERFAZ)
+   ========================================================================== */
+.camera-shake {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 30px; z-index: 1;
+    animation: shake 4s infinite alternate ease-in-out;
+}
+
+@keyframes shake {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-1.5px, 2px) rotate(0.2deg); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-2px, -1.5px) rotate(-0.2deg); }
+    100% { transform: translate(1px, -2px); }
+}
+
+.cam-ui {
+    display: flex; justify-content: space-between;
+    font-size: 1.5rem; letter-spacing: 2px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+}
+
+.rec-dot { color: #ff0000; animation: blink 1s infinite steps(2); }
+@keyframes blink { to { opacity: 0; } }
+
+/* ==========================================================================
+   5. MENÚS (PRINCIPAL, CARGA Y AJUSTES)
+   ========================================================================== */
+.menu-container, .loading-container, .settings-container {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%; max-width: 500px;
+}
+
+.menu-title, .settings-title {
+    font-size: 4rem; text-transform: uppercase; letter-spacing: 8px; margin-bottom: 60px;
+    text-shadow: 3px 0px 0px rgba(255, 0, 0, 0.9), -3px 0px 0px rgba(0, 0, 255, 0.9);
+}
+
+.menu-options { display: flex; flex-direction: column; gap: 25px; }
+
+.menu-btn {
+    background: transparent; border: none; color: rgba(255, 255, 255, 0.75);
+    font-family: 'Share Tech Mono', monospace; font-size: 1.9rem;
+    cursor: pointer; transition: all 0.2s ease-in-out; letter-spacing: 2px; outline: none;
+}
+.menu-btn:hover { color: #fff; text-shadow: 0 0 12px #fff; transform: scale(1.08); }
+
+/* Estilos específicos de Carga */
+.loading-text {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+/* Estilos específicos de Ajustes */
+.setting-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 25px; font-size: 1.5rem; letter-spacing: 1px;
+}
+
+.setting-row input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff; font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5rem; padding: 5px 10px; width: 100px; text-align: center; outline: none;
+}
+.setting-row input:focus { border-color: #fff; box-shadow: 0 0 8px #fff; }
+
+.apply-btn { margin-top: 30px; color: #ff0000; }
+.apply-btn:hover { text-shadow: 0 0 12px #ff0000; }
+
+/* ==========================================================================
+   6. EFECTO APAGADO TELEVISOR VIEJO (CRT TURN OFF)
+   ========================================================================== */
+#tv-off-effect {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #fff; z-index: 99999;
+    animation: tv-turn-off 2.5s forwards cubic-bezier(0.1, 0.9, 0.2, 1);
+}
+
+@keyframes tv-turn-off {
+    0% { transform: scaleY(0.005) scaleX(1); background: #fff; }
+    15% { transform: scaleY(0.005) scaleX(1); background: #fff; }
+    40% { transform: scaleY(0.005) scaleX(0.05); background: #fff; }
+    55% { transform: scaleY(0) scaleX(0); background: #fff; opacity: 1; }
+    100% { transform: scaleY(0) scaleX(0); background: #000; opacity: 0; }
+}
